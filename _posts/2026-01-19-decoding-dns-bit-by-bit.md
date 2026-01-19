@@ -7,7 +7,7 @@ tags: [DNS, Computer Networks]
 
 description: This article is not meant to be for beginners. This is just a technical guide to give actual bit-wise hands-on and not explaining theory.
 
-media_subpath: /assets/lib/Dns/
+media_subpath: /assets/Dns/
 
 pin: true
 ---
