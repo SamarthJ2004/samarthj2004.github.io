@@ -297,7 +297,8 @@ Important Immich notes:
 *   Configure storage template (important):
 
 ```
-{{#if album}}{{{album}}}{{else}}_NoAlbum{{/if}}/{{filename}}
+{% raw %}
+{{#if album}}{{{album}}}{{else}}_NoAlbum{{/if}}/{{filename}}{% endraw %}
 ```
 
 This template keeps album structure intact and places ungrouped photos in `_NoAlbum`. I used ChatGPT to generate this template.
