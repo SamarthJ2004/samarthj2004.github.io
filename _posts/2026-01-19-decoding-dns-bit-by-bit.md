@@ -124,6 +124,8 @@ echo "12 34 01 00 00 01 00 00 00 00 00 00 06 67 6F 6F 67 6C 65 03 63 6F 6D 00 00
 
 > You can either use hexdump or xxd : [Hexdump vs xxd](https://nwsmith.blogspot.com/2012/07/hexdump-and-xxd-output-compared.html?m=1)
 
+> **Use Wireshark** : it will make this decoding simple. It show you everything in a structured way
+
 #### Now try constructing the DNS query for greyninja.dev
 
 ![](3.png)

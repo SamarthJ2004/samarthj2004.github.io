@@ -7,7 +7,7 @@ tags: [SMTP, Computer Networks]
 
 description: This guide focuses on hands-on usage and command-line interaction with SMTP and not explaining the theory.
 
-media_subpath: /assets/
+media_subpath: /assets/SMTP/
 ---
 
 **Protocol Details:**
@@ -90,7 +90,7 @@ This is the body
 
 Now see the raw mail and you will be able to see the `from` and `to` fields. So all these fields are just trivial labels for better UX.
 
-> For multiple users - To: Sam <sam@greyninja.dev>, Boss <boss@greyninja.dev>
+> For multiple users - To: Sam `<sam@greyninja.dev>`, Boss `<boss@greyninja.dev>`
 
 - **Envelope (`MAIL FROM`, `RCPT TO`):** Used by the mail server (MTA to route the email. Like the address written on the outside of a physical envelope.
 - **Headers (`From:`, `To:` inside `DATA`):** Part of the content displayed to the user. Like the letterhead inside the envelope.
@@ -241,5 +241,15 @@ If successful, you will receive `250 2.0.0 OK`.
 
 > Try:
 echo -n "UGFzc3dvcmQ6" | base64 -d
+
+![SMTP TLS Wireshark](SMTP TLS.png)
+
+- Notice the TCP 3-way handshake the 50366 → 465 [SYN] , 465 → 50366 [SYN, ACK] ,50366 → 465 [ACK]
+- TLS starts immediately : Client Hello
+- The server responds and TLS is established: Server Hello
+- Everything after this is encrypted, which you can see as the Application Data and not human readable
+- The red packets: there actually are not error but TCP behaviour to ensure reliability
+
+> Test and Experiment and study the errors you get mainly starting from 5xx
 
 Good Reading Material: [Detailed SMTP](https://mailtrap.io/blog/smtp/#What-is-SMTP)
