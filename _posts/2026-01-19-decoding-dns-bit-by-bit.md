@@ -17,7 +17,7 @@ pin: true
 - No DNS theory, hierarchy, or caching discussion
 - Focuses strictly on wire format and behaviour
 
-DNS: Domain Name System is a part of the layer 7 i.e. the Application Layer. DNS queries are typically sent over UDP; TCP is used for truncation, zone transfers, and explicit TCP queries.
+DNS: Domain Name System is a part of the Application Layer. DNS queries are typically sent over UDP; TCP is used for truncation, zone transfers, and explicit TCP queries.
 
 ![DNS Structure](1.png)
 
