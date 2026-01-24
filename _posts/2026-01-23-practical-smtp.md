@@ -1,11 +1,11 @@
 ---
 layout: post
-title: Practical SMTP
+title: Practical SMTP & HTTP
 date: 2026-01-23 17:40 +0530
 categories: [Low Level Computer Networking]
-tags: [SMTP, Computer Networks]
+tags: [SMTP, HTTP, Computer Networks]
 
-description: This guide focuses on hands-on usage and command-line interaction with SMTP and not explaining the theory.
+description: This guide focuses on hands-on usage and command-line interaction with SMTP and not explaining the theory and a introduction to HTTP.
 
 media_subpath: /assets/SMTP/
 ---
@@ -242,7 +242,18 @@ If successful, you will receive `250 2.0.0 OK`.
 > Try:
 echo -n "UGFzc3dvcmQ6" | base64 -d
 
-![SMTP TLS Wireshark](SMTP TLS.png)
+## **SMTP Over the Wire**
+
+#### Mailpit
+
+![Capturing packets on Loopback port 1025](SMTP Mailpit.png)
+
+- Notice the TCP 3-way handshake the 50759 → 1025 [SYN] , 50759 → 1025 [SYN, ACK] ,50759 → 1025 [ACK]
+- No encryption: you can read the TCP segment content directly
+
+#### smtp.google.com
+
+![Capturing packets for port 465 over the internet](SMTP TLS.png)
 
 - Notice the TCP 3-way handshake the 50366 → 465 [SYN] , 465 → 50366 [SYN, ACK] ,50366 → 465 [ACK]
 - TLS starts immediately : Client Hello
@@ -253,3 +264,32 @@ echo -n "UGFzc3dvcmQ6" | base64 -d
 > Test and Experiment and study the errors you get mainly starting from 5xx
 
 Good Reading Material: [Detailed SMTP](https://mailtrap.io/blog/smtp/#What-is-SMTP)
+
+---
+
+# HTTP is just Text over TCP
+
+My objective is show you how HTTP is just plain text over TCP. It's eye opening how HTTP is simply like a contract between the client and the server and just a long if else conditional logic for an overview.
+
+HTTP is not magic. It is plain text exchanged over a TCP connection.
+
+Lets get on with it. Open Wireshark and on terminal run `nc example.com 80` and do
+
+```
+GET / HTTP/1.1
+Host: example.com
+
+```
+
+Take care of the end character twice at the end of the request `\n` or \r\n depending on the OS.
+
+> Line Feed vs Carriage return : https://stackoverflow.com/questions/12747722/what-is-the-difference-between-a-line-feed-and-a-carriage-return
+
+Now compare the html output you get in the terminal and what you get when you browse example.com on a web browser. Same right?
+
+I strongly recommend implementing a simple HTTP server by yourself. It will be a true eye opener and teach you how "protocol: a set of rules" is just a format over which everyone aggress and nothing more than that.
+I followed the following guide for it.
+> Codecrafters HTTP server tutorial: https://app.codecrafters.io/courses/http-server/overview
+
+This article gives a good hands on
+> HTTP Protocol Hands on:  https://gregsnotes.medium.com/http-protocol-hands-on-e028808ddef6
