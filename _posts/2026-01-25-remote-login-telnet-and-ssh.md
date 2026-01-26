@@ -60,7 +60,7 @@ telnet telehack.com
 
 Stop the capture and now lets see what's happening. 
 
-> Wireshark capture file: 
+> Wireshark capture file: [https://github.com/SamarthJ2004/samarthj2004.github.io/tree/main/assets/Remote_Login/telnet_raw.pcapng][https://github.com/SamarthJ2004/samarthj2004.github.io/tree/main/assets/Remote_Login/telnet_raw.pcapng] 
 > I will be referencing this file for the whole article.
 
 ![TELNET Options](Options.png)
@@ -140,7 +140,7 @@ Then in the next two telnet responses , the server replies to the option negotia
 ##### Character by character behaviour
 Also for the attached file see how each character is sent to the server and then echoed back and then displayed even the backspace. For:
 
-File: [telnet raw](https://github.com/SamarthJ2004/samarthj2004.github.io/tree/main/assets/Remote_Login/telnet_raw.pcapng)
+File: [Server Echoing](https://github.com/SamarthJ2004/samarthj2004.github.io/tree/main/assets/Remote_Login/server_echoing.pcapng)
 
 ```
 l s <backspace>
