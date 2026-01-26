@@ -196,16 +196,16 @@ TELNET sends everything including password in raw bytes which is susceptible to 
 
 Do capture using Wireshark on tcp port 22 and then do `ssh -vvv <user@domain>`
 
-Then analyse the captured TCP segments for SSH or read the debug logs (because of -vvv)
+Then analyse the captured TCP segments for SSH or read the debug logs (because of -vvv). All the data is encrypted and hence not human readable after the key exchange.
+
 ## SSH connection: what happens, in order
 
 1. **TCP connection established**
     - Client opens TCP connection to server on port **22**
     - Standard TCP 3-way handshake
         
-2. **Protocol version exchange (plaintext)**
-    - Client sends: `SSH-2.0-<client>`
-    - Server sends: `SSH-2.0-<server>`
+2. **Protocol version exchange**
+    - The Client and Server exchange the SSH version
     - eg: `debug1: OpenSSH_10.0p2, LibreSSL 3.3.6`
         
 3. **Algorithm negotiation**
@@ -221,10 +221,10 @@ Then analyse the captured TCP segments for SSH or read the debug logs (because o
     - Diffie–Hellman / ECDH performed
         
 5. **Encryption enabled**
-    - All further packets are encrypted and integrity-protected
+    - **All further packets are encrypted**
         
 6. **Server authentication**
-    - Server proves identity using host key        
+    - Server proves identity using host key
     - Client verifies against `known_hosts`
 
 7. **User authentication**
@@ -232,7 +232,6 @@ Then analyse the captured TCP segments for SSH or read the debug logs (because o
         - Public key, or
         - Password, or
         - Keyboard-interactive
-    - Happens **inside encrypted channel**
         
 8. **Connection protocol starts**
     - SSH-CONN activated
@@ -240,7 +239,7 @@ Then analyse the captured TCP segments for SSH or read the debug logs (because o
         
 9. **Session channel created**
     - Client requests a session channel
-    - Pseudo-terminal (pty) allocated
+    - Pseudo-terminal allocated
         
 10. **Interactive shell starts**
     - Remote shell attached to the channel
