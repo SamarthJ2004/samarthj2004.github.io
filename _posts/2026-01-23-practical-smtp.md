@@ -1,11 +1,11 @@
 ---
 layout: post
-title: Practical SMTP & HTTP
+title: Practical SMTP and Intro to HTTP and FTP
 date: 2026-01-23 17:40 +0530
 categories: [Low Level Computer Networking]
-tags: [SMTP, HTTP, Computer Networks]
+tags: [SMTP, HTTP, FTP, Computer Networks]
 
-description: This guide focuses on hands-on usage and command-line interaction with SMTP and not explaining the theory and a introduction to HTTP.
+description: This guide focuses on hands-on usage and command-line interaction with SMTP and not explaining the theory and a introduction to HTTP and FTP.
 
 media_subpath: /assets/SMTP/
 ---
@@ -293,3 +293,32 @@ I followed the following guide for it.
 
 This article gives a good hands on
 > HTTP Protocol Hands on:  https://gregsnotes.medium.com/http-protocol-hands-on-e028808ddef6
+
+---
+
+# **FTP**
+
+```
+nc gnu.ftp.org 21  # control connection
+
+user anonymous
+PASV
+
+returns (h1,h2,h3,h4,h5,h6)
+```
+
+In another terminal: 
+
+`nc <ip> <port>`       : data connection
+
+**ip**: h1.h2.h3.h4
+
+**port**: h5*256 + h6
+
+In the **control** terminal:
+
+```
+LIST
+PASV  # data connection resets after every command
+```
+Each PASV connection works once and then is closed. Also it is only readonly and very restricted. Active connections are not actively reachable due to being behind a NAT so most public ftp server close active connections.
